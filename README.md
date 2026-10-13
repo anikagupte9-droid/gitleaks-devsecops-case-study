@@ -1,66 +1,37 @@
-# Automated Secret Detection in DevSecOps Using Gitleaks
+# Secure Vehicle Telemetry Application Using Gitleaks
 
 ## 1. Overview
 
-This case study demonstrates the use of **Gitleaks** as a DevSecOps security tool for detecting hardcoded secrets in source code.
+This project demonstrates the use of **Gitleaks** as a DevSecOps security tool for detecting and preventing hardcoded credentials in a vehicle telemetry application.
 
-The project demonstrates how secret detection can be integrated directly into the software development workflow using a **Git pre-commit hook**, preventing developers from accidentally committing sensitive credentials.
+A simulated Formula Student vehicle telemetry system is used as the application scenario. The telemetry client communicates with an authenticated mock telemetry service to retrieve vehicle parameters such as speed, battery voltage, battery current, motor torque, and motor temperature.
+
+Gitleaks is integrated into the Git workflow using a **pre-commit hook** so that exposed credentials are detected before they can be committed to the repository.
 
 ---
 
 ## 2. Problem Statement
 
-Hardcoded API keys, passwords, tokens, and other credentials in source code can expose sensitive information and create security risks.
+Modern applications frequently require API keys, access tokens, and other credentials to communicate with external services.
 
-This project demonstrates an automated approach to detecting and preventing such secrets before they are committed to a Git repository.
+If developers accidentally hardcode these credentials into source code, they may be exposed through version control repositories and create a security risk.
 
----
-
-## 3. Tool Selected
-
-**Gitleaks**
-
-Gitleaks is a secret-detection tool that scans source code and Git repositories for accidentally exposed credentials and other sensitive information.
-
-### DevOps Lifecycle Stage
-
-**Security / DevSecOps**
+This project demonstrates a realistic DevSecOps scenario in which a developer accidentally hardcodes a telemetry service credential and Gitleaks automatically detects and prevents the insecure commit.
 
 ---
 
-## 4. Technologies Used
+## 3. Case Study Scenario
 
-- Gitleaks 8.30.0
-- Git
-- GitHub
-- Python
-- pre-commit
-- PowerShell
-- Visual Studio Code
+The application simulates a telemetry system for a Formula Student vehicle named **Athena**.
 
----
-
-## 5. Project Workflow
+The system consists of:
 
 ```text
-Developer writes code
-        |
-        v
-Secret accidentally introduced
-        |
-        v
-Git commit attempted
-        |
-        v
-Pre-commit hook
-        |
-        v
-Gitleaks scan
-        |
-    +---+---+
-    |       |
- Secret    Clean
-    |       |
-    v       v
- Block    Allow
- Commit   Commit
+Vehicle Telemetry Client
+          |
+          | Authenticated API Request
+          v
+    Mock Telemetry API
+          |
+          v
+    Telemetry JSON Data
